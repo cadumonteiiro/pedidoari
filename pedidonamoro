@@ -1,0 +1,340 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Alguém Especial ❤️</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #2b0814 0%, #4a1226 50%, #1f050e 100%);
+            color: #fce7f3;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .font-handwriting {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Ambient floating petals/hearts animation */
+        .petal {
+            position: absolute;
+            background: radial-gradient(circle, #f43f5e 0%, #9f1239 100%);
+            border-radius: 150% 0 150% 0;
+            animation: animatePetal 10s linear infinite;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes animatePetal {
+            0% {
+                top: -10%;
+                transform: translateX(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                top: 110%;
+                transform: translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Glassmorphism card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Polaroid styling */
+        .polaroid {
+            background-color: #ffffff;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* Heart beat animation */
+        .pulse-heart {
+            animation: heartBeat 1.4s infinite ease-in-out;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.15); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+
+        /* Glowing button */
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(244, 63, 94, 0.8);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="relative flex flex-col justify-between items-center px-4 py-8 max-w-md mx-auto">
+
+    <!-- Ambient Animation Layer -->
+    <div id="petals-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Floating Audio Control -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="musicToggle" onclick="toggleMusic()" class="glass-card text-rose-200 p-3 rounded-full flex items-center gap-2 border border-rose-400/30 text-sm font-medium hover:bg-rose-950/50 transition duration-300 shadow-lg">
+            <i id="musicIcon" class="fas fa-music text-rose-400 animate-pulse"></i>
+            <span id="musicText">Nossa Música</span>
+        </button>
+    </div>
+
+    <!-- Hidden HTML5 Audio Player (Royalty-free romantic piano melody) -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112952.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Main Container -->
+    <main class="w-full z-10 my-auto flex flex-col items-center">
+
+        <!-- Polaroid Photo Box -->
+        <div class="polaroid p-3 pb-6 rounded-sm mb-8 w-64 text-center">
+            <div class="relative overflow-hidden rounded-xs bg-rose-900/20 aspect-square mb-3">
+                <!-- Foto do casal (Pode substituir pelo link da sua foto!) -->
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&q=80&w=600" 
+                     alt="Nós Dois" 
+                     class="w-full h-full object-cover rounded-xs"
+                     onerror="this.src='https://placehold.co/600x600/4a1226/fce7f3?text=Foto+do+Casal'">
+            </div>
+            <p class="font-handwriting text-2xl text-slate-800 font-bold">Leia com atenção ❤️</p>
+        </div>
+
+        <!-- Romantic Content Card -->
+        <div class="glass-card w-full rounded-3xl p-6 sm:p-8 text-center border border-rose-400/20 mb-6">
+            
+            <div class="inline-block p-3 rounded-full bg-rose-500/10 mb-4 border border-rose-500/20">
+                <i class="fas fa-heart text-3xl text-rose-400 pulse-heart"></i>
+            </div>
+
+            <h1 class="font-handwriting text-4xl sm:text-5xl text-rose-200 mb-4 font-bold">
+                Para a pessoa mais especial...
+            </h1>
+
+            <div class="text-rose-100/90 leading-relaxed text-sm sm:text-base space-y-3 font-light text-justify px-2">
+                <p>
+                    Desde que você entrou na minha vida, os dias comuns ganharam uma cor diferente. Cada risada compartilhada, cada conversa de fim de noite e cada olhar disseram mais do que mil palavras.
+                </p>
+                <p>
+                    Não quero mais apenas contar momentos ao seu lado, quero oficializar o que já sinto de todo o meu coração.
+                </p>
+            </div>
+
+            <hr class="my-6 border-rose-500/20">
+
+            <!-- The Big Question -->
+            <h2 class="text-xl sm:text-2xl font-bold text-rose-200 mb-6 tracking-wide">
+                Você aceita namorar comigo?
+            </h2>
+
+            <!-- Action Buttons -->
+            <div class="relative min-h-[120px] flex flex-col sm:flex-row items-center justify-center gap-4">
+                
+                <!-- YES BUTTON -->
+                <button id="yesBtn" onclick="acceptProposal()" class="btn-glow w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold rounded-full text-lg shadow-xl hover:from-rose-600 hover:to-pink-700 active:scale-95 transition-all duration-200">
+                    SIM! <i class="fas fa-heart ml-2"></i>
+                </button>
+
+                <!-- NO BUTTON (Movable/Evacuate on hover/touch) -->
+                <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()" class="w-full sm:w-auto px-8 py-3.5 bg-white/10 text-rose-200 border border-rose-300/30 rounded-full font-semibold text-lg hover:bg-white/20 transition-all duration-200">
+                    Não 😜
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="z-10 text-center text-xs text-rose-300/50 py-2">
+        Feito com todo o amor do mundo especialmente para você.
+    </footer>
+
+    <!-- Celebration Modal -->
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <div class="glass-card max-w-sm w-full rounded-3xl p-8 text-center border border-rose-400/40 relative transform scale-90 transition-transform duration-300" id="modalContent">
+            
+            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-rose-500/20 flex items-center justify-center border border-rose-400/30">
+                <i class="fas fa-ring text-4xl text-rose-400 animate-bounce"></i>
+            </div>
+
+            <h3 class="font-handwriting text-5xl text-rose-200 font-bold mb-2">Ela disse SIM! 🎉</h3>
+            
+            <p class="text-rose-100 text-base mb-6 leading-relaxed">
+                Você acabou de me fazer a pessoa mais feliz de todo o universo! Prometo cuidar de você, te fazer rir todos os dias e te amar cada vez mais. ❤️✨
+            </p>
+
+            <button onclick="closeModal()" class="w-full py-3 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-xl transition duration-200 shadow-lg">
+                Te amo! 🥰
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Audio Toggle Logic
+        let isPlaying = false;
+        const bgMusic = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicText = document.getElementById('musicText');
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.classList.remove('fa-compact-disc', 'fa-spin');
+                musicIcon.classList.add('fa-music');
+                musicText.innerText = "Nossa Música";
+            } else {
+                bgMusic.play().then(() => {
+                    musicIcon.classList.remove('fa-music');
+                    musicIcon.classList.add('fa-compact-disc', 'fa-spin');
+                    musicText.innerText = "Tocando...";
+                }).catch(err => {
+                    console.log("Audio block active:", err);
+                });
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Tentar dar play automático ao primeiro clique em qualquer lugar da tela
+        document.body.addEventListener('click', function startAudioOnFirstTouch() {
+            if (!isPlaying) {
+                toggleMusic();
+            }
+            document.body.removeEventListener('click', startAudioOnFirstTouch);
+        }, { once: true });
+
+        // 2. Playful Movable "NO" Button Logic
+        const noBtn = document.getElementById('noBtn');
+        let countMoves = 0;
+
+        function moveButton() {
+            countMoves++;
+            const container = noBtn.parentElement;
+            
+            // Generate random positions relative to screen layout
+            const maxX = window.innerWidth > 400 ? 120 : 60;
+            const maxY = 100;
+
+            const randomX = (Math.random() - 0.5) * maxX * 2;
+            const randomY = (Math.random() - 0.5) * maxY * 2;
+
+            noBtn.style.position = 'relative';
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            
+            // Changing messages on the button if she keeps trying to click "NO"
+            const funMessages = ["Certeza?", "Pensa bem!", "Nem vem! 🙈", "Tentativa em vão! 😉", "Resposta errada! 💕"];
+            if (countMoves > 1) {
+                noBtn.innerText = funMessages[Math.floor(Math.random() * funMessages.length)];
+            }
+        }
+
+        // 3. Acceptance / YES Logic & Confetti Explosions
+        function acceptProposal() {
+            // Trigger Confetti Effect
+            const duration = 4 * 1000;
+            const end = Date.now() + duration;
+
+            (function frame() {
+                // Heart confetti
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#f43f5e', '#fb7185', '#ffffff']
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#f43f5e', '#fb7185', '#ffffff']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+
+            // Show Celebration Modal
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-90');
+                modalContent.classList.add('scale-100');
+            }, 50);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // 4. Floating Petals Generator
+        function createPetals() {
+            const container = document.getElementById('petals-container');
+            const petalCount = 15;
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                
+                // Randomize sizes and speeds
+                const size = Math.random() * 15 + 10;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size + 5}px`;
+                petal.style.left = `${Math.random() * 100}%`;
+                petal.style.animationDuration = `${Math.random() * 5 + 7}s`;
+                petal.style.animationDelay = `${Math.random() * 5}s`;
+                
+                container.appendChild(petal);
+            }
+        }
+
+        window.onload = function() {
+            createPetals();
+        };
+    </script>
+</body>
+</html>
+```
